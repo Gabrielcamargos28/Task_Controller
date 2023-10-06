@@ -2,6 +2,7 @@ package com.taskcontroller.TaskController.domain.funcionario;
 
 import com.taskcontroller.TaskController.domain.usuario.Usuario;
 
+import com.taskcontroller.TaskController.domain.usuario.UsuarioRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Entity(name = "Funcionario")
 @Table(name = "tb_Funcionario")
-@PrimaryKeyJoinColumn(name = "id_funcionario")
+@PrimaryKeyJoinColumn(name = "id_usuario")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -35,6 +36,15 @@ public class Funcionario extends Usuario {
         this.numero = dados.numero();
         this.email = dados.email();
     }
+
+    public Funcionario(String nome, String login, String encryptedPassword, UsuarioRole role,String telefone,String cep,String email,String numero) {
+        super(nome, login,encryptedPassword, role, true);
+        this.telefone = telefone;
+        this.cep = cep;
+        this.numero = numero;
+        this.email = email;
+    }
+
     public void atualizarFuncionario(DadosAtualizacaoFuncionario dados){
         super.setNome(dados.nome());
         this.telefone = dados.telefone();
