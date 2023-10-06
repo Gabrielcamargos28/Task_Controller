@@ -4,6 +4,7 @@ import com.taskcontroller.TaskController.domain.usuario.Usuario;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity(name = "Funcionario")
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @PrimaryKeyJoinColumn(name = "id_funcionario")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class Funcionario extends Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,5 +34,14 @@ public class Funcionario extends Usuario {
         this.cep = dados.cep();
         this.numero = dados.numero();
         this.email = dados.email();
+    }
+    public void atualizarFuncionario(DadosAtualizacaoFuncionario dados){
+        super.setNome(dados.nome());
+        this.telefone = dados.telefone();
+        this.cep = dados.cep();
+        this.numero = dados.numero();
+    }
+    public void desabilitar() {
+        this.setAtivo(false);
     }
 }
