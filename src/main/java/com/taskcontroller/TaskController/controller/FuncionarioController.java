@@ -1,12 +1,14 @@
 package com.taskcontroller.TaskController.controller;
 
 import com.taskcontroller.TaskController.domain.funcionario.*;
+import com.taskcontroller.TaskController.domain.usuario.Usuario;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -21,7 +23,9 @@ public class FuncionarioController {
     @PostMapping("/cadastrar")
     @Transactional
     public ResponseEntity cadastrarFuncionario(@RequestBody @Valid DadosCadastroFuncionario dados, UriComponentsBuilder uriBuilder){
-        var funcionario = new Funcionario(dados);
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(dados.senha());
+        Funcionario funcionario = new Funcionario(dados.nome(),dados.login(),encryptedPassword,dados.role(),dados.telefone(), dados.cep(), dados.email(), dados.numero() );
         repository.save(funcionario);
 
         var uri = uriBuilder.path("/funcionarios/{id}").buildAndExpand(funcionario.getId()).toUri();

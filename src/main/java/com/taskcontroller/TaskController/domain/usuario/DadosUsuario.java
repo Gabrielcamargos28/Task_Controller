@@ -4,7 +4,6 @@ public record DadosUsuario(
         String nome,
         String login,
         String senha,
-        UsuarioRole role,
-        Boolean ativo
+        UsuarioRole role
 ) {
 }
