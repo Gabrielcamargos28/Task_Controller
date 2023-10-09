@@ -10,15 +10,15 @@ import lombok.NoArgsConstructor;
 
 @Entity(name = "Funcionario")
 @Table(name = "tb_Funcionario")
-@PrimaryKeyJoinColumn(name = "id_usuario")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@PrimaryKeyJoinColumn(name="id_usuario")
 public class Funcionario extends Usuario {
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_funcionario")
-    private Long id;
+    private Long id;*/
     @Column(name="telefone")
     private String telefone;
     @Column(name="cep")
