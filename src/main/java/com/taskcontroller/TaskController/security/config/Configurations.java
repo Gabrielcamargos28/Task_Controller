@@ -34,11 +34,11 @@ public class Configurations {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST,"/auth/register").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
-                        .requestMatchers( "/clientes/**").hasRole("ADMIN")
                         .requestMatchers("/funcionarios/**").hasRole("ADMIN")
+                        .requestMatchers( "/clientes/**").authenticated()
                         .requestMatchers("/tarefas/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())

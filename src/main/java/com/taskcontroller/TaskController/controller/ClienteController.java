@@ -1,6 +1,8 @@
 package com.taskcontroller.TaskController.controller;
 
 import com.taskcontroller.TaskController.domain.cliente.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.lang.annotation.Retention;
+
+
+@SecurityRequirement(name = "BearerToken")
+@RequestMapping("/clientes")
+@RestController
 public class ClienteController {
     @Autowired
     private ClienteRepository repository;
