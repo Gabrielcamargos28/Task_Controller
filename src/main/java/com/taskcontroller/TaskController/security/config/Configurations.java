@@ -32,12 +32,12 @@ public class Configurations {
         return httpSecurity
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        //.requestMatchers(HttpMethod.POST,"/auth/register").hasRole("ADMIN")
-                        //.requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
-                        //.requestMatchers( "/clientes/**").hasRole("ADMIN")
-                        //.requestMatchers("/funcionarios/**").hasRole("ADMIN")
-                        //.requestMatchers("/tarefas/**").permitAll()
-                        //.requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/auth/register").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
+                        .requestMatchers("/funcionarios/**").hasRole("ADMIN")
+                        .requestMatchers( "/clientes/**").authenticated()
+                        .requestMatchers("/tarefas/**").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().permitAll()
                 )
                 .csrf(csrf -> csrf.disable())
