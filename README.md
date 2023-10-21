@@ -33,9 +33,10 @@ Este repositório contém três branches principais:
 - **main**: A branch principal contém a versão mais estável do projeto.
 
 - **dev**: A branch de desenvolvimento é usada para implementações e testes em desenvolvimento.
+- Acesse a implantação da branch `dev` em: [TaskController no Railway](https://taskcontroller-dev.up.railway.app/swagger-ui/index.html/)
 
-- **prod**: A branch de produção é usada para implantações em ambientes de produção. Acesse a implantação da branch `dev` em: [TaskController no Railway](https://taskcontroller-dev.up.railway.app/swagger-ui/index.html/)
 
+- **prod**: A branch de produção é usada para implantações em ambientes de produção. 
 ## Documentação
 
 A documentação da API pode ser acessada na URL da implantação principal: [Documentação da API](https://taskcontroller-dev.up.railway.app/swagger-ui/index.html/)
