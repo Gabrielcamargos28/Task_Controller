@@ -66,4 +66,4 @@ Linkedin: [https://www.linkedin.com/in/gabriel-camargos-dev/].
 
 ##Diagrama de Classes
 
-![Diagrama de classes]()
+![Diagrama de classes](https://github.com/Gabrielcamargos28/Task_Controller/blob/main/Diagrama%20de%20classes.png)
