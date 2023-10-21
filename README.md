@@ -20,11 +20,24 @@ Este repositório contém um projeto desenvolvido como parte de um Trabalho de C
 - Project Lombok
 - PostgreSQL
 
-## Configuração e Build
+## Como Executar
 
-Após clonar o repositório, você pode construir o projeto executando o seguinte comando Maven:
+- Clonar repositório git:
+```
+git clone https:[//github.com/Gabrielcamargos28/Api_Deploy.git](https://github.com/Gabrielcamargos28/Task_Controller)
+```
 
-mvn clean package
+- Executar:
+```
+java -jar ..\target\TaskController-0.0.1-SNAPSHOT.jar
+```
+
+## Testando
+
+```
+[Railway] https://taskcontroller-dev.up.railway.app/swagger-ui/index.html#/
+[localhost] http://localhost:8080/swagger-ui/index.html
+```
 
 ## Branches
 
