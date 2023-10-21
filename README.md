@@ -63,3 +63,7 @@ Este projeto foi desenvolvido por Gabriel Camargos como parte do TCD.
 Este README serve como um guia básico para o projeto. Para informações mais detalhadas e instruções sobre como configurar e executar o projeto localmente, consulte a documentação ou entre em contato:
 
 Linkedin: [https://www.linkedin.com/in/gabriel-camargos-dev/].
+
+##Diagrama de Classes
+
+![Diagrama de classes]()
