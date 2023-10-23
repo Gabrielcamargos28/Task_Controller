@@ -24,7 +24,7 @@ Este repositório contém um projeto desenvolvido como parte de um Trabalho de C
 
 - Clonar repositório git:
 ```
-git clone https:[//github.com/Gabrielcamargos28/Api_Deploy.git](https://github.com/Gabrielcamargos28/Task_Controller)
+git clone https:[//github.com/Gabrielcamargos28/Task_Controller.git](https://github.com/Gabrielcamargos28/Task_Controller)
 ```
 
 - Executar:
