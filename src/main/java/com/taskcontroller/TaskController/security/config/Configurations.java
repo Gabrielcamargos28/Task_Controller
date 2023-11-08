@@ -32,7 +32,7 @@ public class Configurations {
         return httpSecurity
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST,"/auth/register").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
                         .requestMatchers("/funcionarios/**").hasRole("ADMIN")
                         .requestMatchers( "/clientes/**").authenticated()

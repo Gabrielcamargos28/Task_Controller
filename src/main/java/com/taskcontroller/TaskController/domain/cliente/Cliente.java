@@ -33,6 +33,7 @@ public class Cliente {
 
     @Column(name="ativo")
     private Boolean ativo;
+
     public Cliente(DadosCadastroCliente dados){
         this.nome = dados.nome();
         this.telefone = dados.telefone();

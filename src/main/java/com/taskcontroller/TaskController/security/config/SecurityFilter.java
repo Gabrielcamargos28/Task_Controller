@@ -1,5 +1,6 @@
 package com.taskcontroller.TaskController.security.config;
 
+import com.taskcontroller.TaskController.domain.usuario.Usuario;
 import com.taskcontroller.TaskController.domain.usuario.UsuarioRepository;
 import com.taskcontroller.TaskController.security.token.TokenService;
 import jakarta.servlet.FilterChain;

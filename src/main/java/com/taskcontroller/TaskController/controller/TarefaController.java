@@ -4,6 +4,9 @@ package com.taskcontroller.TaskController.controller;
 import com.taskcontroller.TaskController.domain.tarefa.DadosAgendarTarefa;
 import com.taskcontroller.TaskController.domain.tarefa.DadosCancelamentoTarefa;
 import com.taskcontroller.TaskController.domain.tarefa.DadosDetalhamentoTarefa;
+import com.taskcontroller.TaskController.domain.tarefa.Tarefa;
+import com.taskcontroller.TaskController.domain.usuario.DadosLoginPesquisa;
+import com.taskcontroller.TaskController.domain.usuario.Usuario;
 import com.taskcontroller.TaskController.service.AgendadorDeTarefas;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -14,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 
 @SecurityRequirement(name = "BearerToken")
@@ -38,7 +43,11 @@ public class TarefaController {
         var page = agendadorDeTarefas.mostrarTarefas(paginacao);
         return page;
     }
-
+    @PostMapping("mostrartarefasexpecificas")
+    public Page<Tarefa> mostrarTarefasDeUsuario(@RequestBody DadosLoginPesquisa dados){
+        Page lista = agendadorDeTarefas.mostrarTarefasDeUsuario(dados);
+        return lista;
+    }
     @DeleteMapping("desabilitartarefa")
     @Transactional
     public ResponseEntity desabilitar(@RequestBody @Valid DadosCancelamentoTarefa dados){
