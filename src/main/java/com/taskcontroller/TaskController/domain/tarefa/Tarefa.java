@@ -23,10 +23,10 @@ public class Tarefa {
     private String nome;
     @Column(name="descricao")
     private String descricao;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="fk_id_funcionario")
     private Funcionario funcionario;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="fk_id_cliente")
     private Cliente cliente;
     @Column(name="data_limite")

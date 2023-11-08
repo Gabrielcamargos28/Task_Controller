@@ -1,5 +1,8 @@
 package com.taskcontroller.TaskController.service;
 
+import com.taskcontroller.TaskController.domain.usuario.DadosLoginPesquisa;
+import com.taskcontroller.TaskController.domain.usuario.Usuario;
+import com.taskcontroller.TaskController.domain.usuario.UsuarioRepository;
 import com.taskcontroller.TaskController.domain.validacao.ValidacaoException;
 import com.taskcontroller.TaskController.domain.cliente.ClienteRepository;
 import com.taskcontroller.TaskController.domain.funcionario.FuncionarioRepository;
@@ -8,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AgendadorDeTarefas {
@@ -18,6 +23,9 @@ public class AgendadorDeTarefas {
     ClienteRepository clienteRepository;
     @Autowired
     FuncionarioRepository funcionarioRepository;
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
     public DadosDetalhamentoTarefa agendar(DadosAgendarTarefa dados){
         var cliente = clienteRepository.getReferenceById(dados.fk_id_cliente());
@@ -31,6 +39,15 @@ public class AgendadorDeTarefas {
     public Page<DadosDetalhamentoTarefa> mostrarTarefas(Pageable paginacao){
         var page = tarefaRepository.findAlByAtivoTrue(paginacao).map(DadosDetalhamentoTarefa::new);
         return page;
+    }
+
+    public Page<Tarefa> mostrarTarefasDeUsuario(DadosLoginPesquisa dados){
+        System.out.println(dados.login());
+        var usuario = usuarioRepository.findByLogin(dados.login());
+        Long idUsuario = usuario.getId();
+        System.out.println(idUsuario);
+        Page lista = tarefaRepository.acharTarefas(idUsuario, Pageable.ofSize(10));
+        return lista;
     }
 
     public void desativar(DadosCancelamentoTarefa dados){
