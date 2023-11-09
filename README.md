@@ -66,9 +66,6 @@ Este repositório contém quatro branches principais:
 
 - **dev**: A branch de desenvolvimento é usada para implementações e testes em desenvolvimento.
 - Acesse a implantação da branch `dev` em: [TaskController no Railway](https://taskcontroller-dev.up.railway.app/swagger-ui/index.html/)
-
-
-- **prod**: A branch de produção é usada para implantações em ambientes de produção.
 -  **digitalOcean**: A branch de é usada para implantações de containers e configurações.
   
 ## Documentação
