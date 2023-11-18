@@ -31,21 +31,18 @@ public class AgendadorDeTarefas {
         var cliente = clienteRepository.getReferenceById(dados.fk_id_cliente());
         var funcionario = funcionarioRepository.getReferenceById(dados.fk_id_funcionario());
         var tarefa = new Tarefa(null,dados.nome(),dados.descricao(),funcionario,cliente,dados.data_limite(),true,false);
-        System.out.println("Tarefa:"+tarefa);
         tarefaRepository.save(tarefa);
         return new DadosDetalhamentoTarefa(tarefa);
     }
 
-    public Page<DadosDetalhamentoTarefa> mostrarTarefas(Pageable paginacao){
-        var page = tarefaRepository.findAlByAtivoTrue(paginacao).map(DadosDetalhamentoTarefa::new);
-        return page;
+    public Page<DadosDetalhamentoTarefaValidacao> mostrarTarefas(Pageable paginacao){
+        Page lista = tarefaRepository.findAlByAtivoTrue(paginacao).map(DadosDetalhamentoTarefaValidacao::new);
+        return lista;
     }
 
-    public Page<Tarefa> mostrarTarefasDeUsuario(DadosLoginPesquisa dados){
-        System.out.println(dados.login());
+    public Page<DadosDetalhamentoTarefaValidacao> mostrarTarefasDeUsuario(DadosLoginPesquisa dados){
         var usuario = usuarioRepository.findByLogin(dados.login());
         Long idUsuario = usuario.getId();
-        System.out.println(idUsuario);
         Page lista = tarefaRepository.acharTarefas(idUsuario, Pageable.ofSize(10));
         return lista;
     }
@@ -72,11 +69,8 @@ public class AgendadorDeTarefas {
         if(!tarefaRepository.existsById(dados.id())){
             throw new ValidacaoException("Id da tarefa inexistente");
         }
-        System.out.println("Teste");
         var tarefa = tarefaRepository.getReferenceById(dados.id());
-        System.out.println("Teste");
         tarefa.atualizarTarefa(dados);
-        System.out.println("Teste");
         return tarefa;
     }
 

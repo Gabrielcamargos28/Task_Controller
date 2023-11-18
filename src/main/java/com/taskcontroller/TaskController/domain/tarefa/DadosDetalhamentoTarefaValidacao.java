@@ -11,7 +11,8 @@ public record DadosDetalhamentoTarefaValidacao(Long id_tarefa,
                                       String nome_funcionario,
                                       String nome_cliente,
                                       String ass_cliente,
-                                      String ass_administrador
+                                      String ass_administrador,
+                                      Boolean validada
 ) {
     public DadosDetalhamentoTarefaValidacao (Tarefa tarefa){
         this(tarefa.getId_tarefa(),tarefa.getNome(),
@@ -22,6 +23,8 @@ public record DadosDetalhamentoTarefaValidacao(Long id_tarefa,
                 tarefa.getFuncionario().getNome(),
                 tarefa.getCliente().getNome(),
                 tarefa.getAss_cliente(),
-                tarefa.getAss_administrador());
+                tarefa.getAss_administrador(),
+                tarefa.getValidada());
     }
+
 }

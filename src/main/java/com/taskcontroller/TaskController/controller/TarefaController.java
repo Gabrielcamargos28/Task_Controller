@@ -41,14 +41,14 @@ public class TarefaController {
     }
 
     @GetMapping("mostrartarefas")
-    public Page<DadosDetalhamentoTarefa> mostrarTarefas(Pageable paginacao){
-        var page = agendadorDeTarefas.mostrarTarefas(paginacao);
+    public Page<Tarefa> mostrarTarefas(Pageable paginacao){
+        Page page = agendadorDeTarefas.mostrarTarefas(paginacao);
         return page;
     }
     @PostMapping("mostrartarefasexpecificas")
     public Page<Tarefa> mostrarTarefasDeUsuario(@RequestBody DadosLoginPesquisa dados){
-        Page lista = agendadorDeTarefas.mostrarTarefasDeUsuario(dados);
-        return lista;
+        Page page = agendadorDeTarefas.mostrarTarefasDeUsuario(dados);
+        return page;
     }
     @DeleteMapping("desabilitartarefa")
     @Transactional
