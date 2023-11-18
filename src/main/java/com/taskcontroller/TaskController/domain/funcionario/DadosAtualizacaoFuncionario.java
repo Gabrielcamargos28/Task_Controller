@@ -1,7 +1,7 @@
 package com.taskcontroller.TaskController.domain.funcionario;
 
 public record DadosAtualizacaoFuncionario(
-        Long id_funcionario,
+        Long id,
         String nome,
         String login,
         String email,

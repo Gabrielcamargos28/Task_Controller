@@ -30,7 +30,7 @@ public class AgendadorDeTarefas {
     public DadosDetalhamentoTarefa agendar(DadosAgendarTarefa dados){
         var cliente = clienteRepository.getReferenceById(dados.fk_id_cliente());
         var funcionario = funcionarioRepository.getReferenceById(dados.fk_id_funcionario());
-        var tarefa = new Tarefa(null, dados.nome(), dados.descricao(),funcionario,cliente,dados.data_limite(),true);
+        var tarefa = new Tarefa(null,dados.nome(),dados.descricao(),funcionario,cliente,dados.data_limite(),true,false);
         System.out.println("Tarefa:"+tarefa);
         tarefaRepository.save(tarefa);
         return new DadosDetalhamentoTarefa(tarefa);
@@ -56,6 +56,33 @@ public class AgendadorDeTarefas {
         }
         var tarefa = tarefaRepository.getReferenceById(dados.id_tarefa());
         tarefa.cancelar();
+    }
+
+    public Tarefa validarTarefa(DadosValidarTarefa dados){
+        if(!tarefaRepository.existsById(dados.id_tarefa())){
+            throw new ValidacaoException("Id da tarefa inexistente");
+        }
+        var tarefa = tarefaRepository.getReferenceById(dados.id_tarefa());
+        tarefa.validarTarefa(dados);
+
+        return tarefa;
+    }
+
+    public Tarefa atualizarTarefa(DadosAtualizacaoTarefa dados){
+        if(!tarefaRepository.existsById(dados.id())){
+            throw new ValidacaoException("Id da tarefa inexistente");
+        }
+        System.out.println("Teste");
+        var tarefa = tarefaRepository.getReferenceById(dados.id());
+        System.out.println("Teste");
+        tarefa.atualizarTarefa(dados);
+        System.out.println("Teste");
+        return tarefa;
+    }
+
+    public Tarefa detalharPorId(Long id_tarefa){
+        Tarefa tarefa = tarefaRepository.getReferenceById(id_tarefa);
+        return tarefa;
     }
 
 }

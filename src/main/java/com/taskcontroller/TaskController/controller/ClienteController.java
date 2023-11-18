@@ -3,6 +3,7 @@ package com.taskcontroller.TaskController.controller;
 import com.taskcontroller.TaskController.domain.cliente.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +25,7 @@ public class ClienteController {
 
     @PostMapping("/cadastrar")
     @Transactional
-    public ResponseEntity cadastrarCliente(@RequestBody DadosCadastroCliente dados, UriComponentsBuilder uriBuilder){
+    public ResponseEntity cadastrarCliente(@RequestBody @Valid DadosCadastroCliente dados, UriComponentsBuilder uriBuilder){
         var cliente = new Cliente(dados);
         repository.save(cliente);
 

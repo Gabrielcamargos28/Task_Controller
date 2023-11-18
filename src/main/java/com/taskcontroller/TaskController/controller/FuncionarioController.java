@@ -1,7 +1,12 @@
 package com.taskcontroller.TaskController.controller;
 
 import com.taskcontroller.TaskController.domain.funcionario.*;
+import com.taskcontroller.TaskController.domain.tarefa.DadosDetalhamentoTarefa;
+import com.taskcontroller.TaskController.domain.tarefa.DadosValidarTarefa;
+import com.taskcontroller.TaskController.domain.tarefa.Tarefa;
 import com.taskcontroller.TaskController.domain.usuario.Usuario;
+import com.taskcontroller.TaskController.service.AgendadorDeTarefas;
+import com.taskcontroller.TaskController.service.FuncionarioService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,20 +25,17 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("/funcionarios")
 public class FuncionarioController {
     @Autowired
+    private FuncionarioService service;
+    @Autowired
     private FuncionarioRepository repository;
 
 
     @PostMapping("/cadastrar")
     @Transactional
     public ResponseEntity cadastrarFuncionario(@RequestBody @Valid DadosCadastroFuncionario dados, UriComponentsBuilder uriBuilder){
-
-        String encryptedPassword = new BCryptPasswordEncoder().encode(dados.senha());
-        Funcionario funcionario = new Funcionario(dados.nome(),dados.login(),encryptedPassword,dados.role(),dados.telefone(), dados.cep(), dados.email(), dados.numero() );
-        repository.save(funcionario);
-
-        var uri = uriBuilder.path("/funcionarios/{id}").buildAndExpand(funcionario.getId()).toUri();
-
-        return ResponseEntity.created(uri).body(new DadosDetalhamentoFuncionario(funcionario));
+        DadosDetalhamentoFuncionario funcionario = service.cadastrarFuncionario(dados);
+        var uri = uriBuilder.path("/funcionarios/{id}").buildAndExpand(funcionario.id()).toUri();
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoFuncionario(new Funcionario(dados)));
     }
 
     @GetMapping("/listarfuncionarios")
@@ -45,15 +47,15 @@ public class FuncionarioController {
     @PutMapping("/atualizarfuncionario")
     @Transactional
     public ResponseEntity atualizarFuncionario(@RequestBody DadosAtualizacaoFuncionario dados){
-        var funcionario = repository.getReferenceById(dados.id_funcionario());
+        var funcionario = repository.getReferenceById(dados.id());
         funcionario.atualizarFuncionario(dados);
         return ResponseEntity.ok(new DadosDetalhamentoFuncionario(funcionario));
     }
 
-    @DeleteMapping("/desativarfuncionario/{id_funcionario}")
+    @DeleteMapping("/desativarfuncionario/{id}")
     @Transactional
-    public ResponseEntity deletarFuncionario(@PathVariable Long id_funcionario){
-        var funcionario = repository.getReferenceById(id_funcionario);
+    public ResponseEntity deletarFuncionario(@PathVariable Long id){
+        var funcionario = repository.getReferenceById(id);
         funcionario.desabilitar();
         return ResponseEntity.noContent().build();
     }
@@ -63,5 +65,4 @@ public class FuncionarioController {
         var funcionario = repository.getReferenceById(id_funcionario);
         return ResponseEntity.ok(new DadosDetalhamentoFuncionario(funcionario));
     }
-
 }

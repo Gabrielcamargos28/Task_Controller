@@ -52,6 +52,6 @@ public class Funcionario extends Usuario {
         this.numero = dados.numero();
     }
     public void desabilitar() {
-        this.setAtivo(false);
+        super.setAtivo(false);
     }
 }

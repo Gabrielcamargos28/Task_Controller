@@ -5,8 +5,11 @@ import com.taskcontroller.TaskController.domain.usuario.UsuarioRole;
 import jakarta.validation.constraints.*;
 
 public record DadosCadastroFuncionario(
+
+        @NotNull(message = "Nome null")
+                @NotBlank(message = "Nome em branco")
         String nome,
-        @NotNull
+        @NotNull()
         String login,
         @NotNull
                 @NotBlank

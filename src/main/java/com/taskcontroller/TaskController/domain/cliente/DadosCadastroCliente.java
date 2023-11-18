@@ -12,10 +12,11 @@ import java.util.Objects;
 public final class DadosCadastroCliente {
         private final @NotNull(message = "nome nao pode ser vazio") @NotBlank String nome;
         private final @NotNull(message = "numero nao pode ser vazio") @NotBlank String numero;
-        private final @NotNull(message = "telefone nao pode ser vazio") @Pattern(regexp = "(\\d{2}) \\d{4}-\\d{4}") @NotBlank String telefone;
+        private final @NotNull(message = "telefone nao pode ser vazio")
+        @NotBlank String telefone;
         private final @NotNull(message = "cep nao pode ser vazio") @NotBlank(message = "em branco") String cep;
-        private final @CPF String cpf;
-        private final @CNPJ String cnpj;
+        private final String cpf;
+        private final String cnpj;
 
         public DadosCadastroCliente(
                 @NotNull(message = "nome nao pode ser vazio")
@@ -31,10 +32,9 @@ public final class DadosCadastroCliente {
                 @NotNull(message = "cep nao pode ser vazio")
                 @NotBlank(message = "em branco")
                 String cep,
-                @CPF
+
                 String cpf,
 
-                @CNPJ
                 String cnpj
         ) {
                 this.nome = nome;

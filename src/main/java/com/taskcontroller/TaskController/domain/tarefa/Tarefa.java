@@ -31,8 +31,42 @@ public class Tarefa {
     private Cliente cliente;
     @Column(name="data_limite")
     private LocalDateTime data_limite;
+
+    @Column(name = "ass_administrado")
+    private String ass_administrador;
+
+    @Column(name = "ass_cliente")
+    private String ass_cliente;
+
+    @Column(name = "validada")
+    private Boolean validada;
+    
     @Column(name="ativo")
     private Boolean ativo;
+
+    public Tarefa(Long id_tarefa, String nome, String descricao, Funcionario funcionario, Cliente cliente, LocalDateTime data_limite, boolean ativo, boolean validada) {
+        this.id_tarefa = id_tarefa;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.funcionario = funcionario;
+        this.cliente = cliente;
+        this.data_limite = data_limite;
+        this.ativo = true;
+        this.validada = false;
+    }
+
+    public void validarTarefa(DadosValidarTarefa dados){
+        this.ass_administrador = dados.ass_administrador();
+        this.ass_cliente = dados.ass_cliente();
+        if(!dados.ass_administrador().isEmpty() && !dados.ass_cliente().isEmpty()){
+            this.validada = true;
+        }
+        this.ativo = true;
+    }
+    public void atualizarTarefa(DadosAtualizacaoTarefa dados){
+        this.nome = dados.nome();
+        this.descricao = dados.descricao();
+    }
 
     public void cancelar(){
         this.ativo = false;
