@@ -3,6 +3,7 @@ package com.taskcontroller.TaskController.controller;
 import com.taskcontroller.TaskController.domain.email.DadosEnviarEmail;
 import com.taskcontroller.TaskController.domain.email.Email;
 import com.taskcontroller.TaskController.service.EmailService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@SecurityRequirement(name = "BearerToken")
 @RestController
 @RequestMapping("email")
 public class EmailController {
